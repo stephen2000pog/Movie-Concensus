@@ -1,13 +1,19 @@
+const mongoose = require('mongoose');
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
-const cors = require('cors')
+const port = process.env.PORT || 5000;
+const userRoutes = require('./routes/example');
 
-app.use(cors())
+app.use(cors());
+app.use(express.json());
+app.use('/api/users', userRoutes);
 
-app.get('/', (req, res) => {
-    res.send('Ceci est un test')
-})
+const mongoURI = 'mongodb+srv://admin1:admin1@cluster0.sbmpwv4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
-app.listen(8080, () => {
-    console.log('server listening on port 8080')
-})
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+app.listen(port, () => {
+  console.log(`Le serveur Express est en cours d'exécution sur http://localhost:${port}`);
+});
