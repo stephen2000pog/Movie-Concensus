@@ -1,21 +1,17 @@
-import axios from 'axios'
+import React from 'react';
 import './App.css';
+import AddUserButton from './component/test';
 
 function App() {
-
-  const apiCall = () => {
-    axios.get('http://localhost:8080').then((data) => {
-      console.log(data)
-    })
-  }
-
   return (
     <div className="App">
       <header className="App-header">
-        <buttton onClick={apiCall}>Make API Call</buttton>
+       <AddUserButton />
       </header>
     </div>
   );
 }
 
 export default App;
+
+
