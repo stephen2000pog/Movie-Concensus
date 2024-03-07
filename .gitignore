@@ -50,7 +50,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # Fichiers de package manager
-package-lock.json
 yarn.lock
 
 # Fichiers de build
