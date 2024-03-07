@@ -1,78 +1,23 @@
-# Dossiers générés
-node_modules/
-build/
-dist/
-coverage/
-/.pnp/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Fichiers générés
-*.pem
-*.log
-*.pid
-*.seed
-*.pid.lock
-*.log
-*.yml
-*.min.css.map
-*.min.js.map
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
-# Fichiers d'environnement
-.env
+# testing
+/coverage
 
-# Dossiers spécifiques à React
-/.cache/
-/public/
-/.idea/
+# production
+/build
 
-# Fichiers de configuration pour l'éditeur
-.vscode/
-*.code-workspace
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Fichiers de configuration pour les IDE
-.idea/
-
-# Fichiers de sauvegarde
-*.bak
-*.swp
-
-# Fichiers de test
-__tests__/
-test/
-tests/
-
-# Fichiers temporaires
-*.tmp
-*.temp
-
-# Fichiers d'installation
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Fichiers de package manager
-package-lock.json
-yarn.lock
-
-# Fichiers de build
-/coverage/
-/build/
-/dist/
-
-# Fichiers d'historique de navigation
-.history/
-
-# Fichiers de sauvegarde de déploiement
-.DS_Store
-Thumbs.db
-
-# Fichiers de sauvegarde pour Windows
-Desktop.ini
-$RECYCLE.BIN/
-ehthumbs.db
-
-# Fichiers de sauvegarde pour MacOS
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*

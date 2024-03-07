@@ -10,6 +10,7 @@ npm install mongodb
 npm install bootstrap react-router-dom
 npm install mongodb
 npm install mongoose
+npm install @faker-js/faker --save-dev
 
 ## Run the project
 cd client npm start

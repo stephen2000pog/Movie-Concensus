@@ -10,12 +10,13 @@ const getRandomLetter = () => {
 };
 
 const generateSearchTerm = async () => {
-  const randomWord = faker.word.words(1); //getRandomLetter() + getRandomLetter();
+  //const randomWord = faker.word.words(1); 
+  const randomWord = getRandomLetter() + getRandomLetter();
   return randomWord;
 };
 
 const fetchDataAndStoreInDB = async () => {
-  const MovieToStore = 1;
+  const MovieToStore = 200;
   try {
       for (let i = 0; i < MovieToStore; i++) {
           const searchTerm = await generateSearchTerm();
