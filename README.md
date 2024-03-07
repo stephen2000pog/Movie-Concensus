@@ -2,15 +2,32 @@
 online database of information related to films
 
 ## Install dependacy
-npm install -g npm@10.4.0
-npm install express
-npm install axios
-npm install cors
-npm install mongodb
-npm install bootstrap react-router-dom
-npm install mongodb
-npm install mongoose
+Les dependances de chaque environnment se retrouve dans le fichier package.json.
+
+ Pour installer les dependances du serveur:Dans le terminal, faites la commande 
+
+```
+cd server
+npm install
+```
+
+Pour installer les dependances du client react:Dans le terminal, faites la commande 
+
+```
+cd client
+npm install
+```
 
 ## Run the project
-cd client npm start
-cd server node index.js
+Pour run le serveur client
+
+ ```
+cd client
+npm start
+```
+
+Pour run le serveur
+
+ ```
+cd server
+node index.js
