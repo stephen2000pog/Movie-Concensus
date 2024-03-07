@@ -1,6 +1,7 @@
 // AddUserButton.jsx
 import React from 'react';
 import axios from 'axios';
+import '../App.css';
 
 const AddUserButton = () => {
   const handleAddUser = async () => {
@@ -17,7 +18,11 @@ const AddUserButton = () => {
   };
 
   return (
-    <button onClick={handleAddUser}>Ajouter un utilisateur</button>
+    <div className="App">
+      <header className="App-header">
+        <button onClick={handleAddUser}>Ajouter un utilisateur</button>
+      </header>
+    </div>
   );
 };
 
