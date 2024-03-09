@@ -7,10 +7,10 @@ const AddUserButton = () => {
   const handleAddUser = async () => {
     try {
       const response = await axios.post('http://localhost:5000/api/users', {
-        username: 'JohnDoe2',
-        email: 'john.doe@example.com',
+        username: 'JohnDoe5',
+        email: 'john.doe5@example.com',
+        password: 'jonhdoe5'
       });
-
       console.log(response.data);
     } catch (error) {
       console.error('Erreur lors de l\'ajout de l\'utilisateur depuis le frontend :', error);

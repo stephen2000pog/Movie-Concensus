@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Movie = require('../models/Movie');
+const Movie = require('../models/movie');
 const axios = require('axios');
 const { faker } = require('@faker-js/faker');
 
