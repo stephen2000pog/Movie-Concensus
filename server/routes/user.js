@@ -21,19 +21,17 @@ router.post("/login", (req, res) => {
     .then(user => {
       if (user) {
         if (user.password === password) {
-          const _id = {_id: user._id}
+          const _id = { _id: user._id }
           const token = createToken(_id)
-          res.status(200)
-          res.json({email, token})
+          res.json({ email, token, status: 200 })
         } else {
-          res.status(400).json("Mot de passe invalide")
+          res.json({ msg: "Mot de passe invalide", status: 400 })
         }
       } else {
-        console.log(password)
-        res.status(400).json("Compte introuvable")
+        res.json({ msg: "Compte introuvable", status: 400 })
       }
     })
-    .catch(() => res.status(500).json("Erreur côté serveur"))
+    .catch(() => res.json({ msg: "Erreur innatendue côté serveur", status: 500 }))
 })
 
 router.post('/signup', async (req, res) => {
@@ -42,15 +40,12 @@ router.post('/signup', async (req, res) => {
     let errors = {};
     if ((await UserModel.find({ username: username })).length) {
       errors.username = "Le nom d'utilisateur est déjà pris.";
-      console.log("username");
     }
     if ((await UserModel.find({ email: email })).length) {
       errors.email = "Cette adresse courriel est déjà utilisée.";
-      console.log("email");
     }
     if ((await UserModel.find({ password: password })).length) {
       errors.password = "Ce mot de passe est indisponible.";
-      console.log("password");
     }
     if (Object.keys(errors).length > 0) {
       res.json(errors);
