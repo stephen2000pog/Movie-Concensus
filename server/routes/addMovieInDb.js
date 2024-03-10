@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Movie = require('../models/Movie');
+const Movie = require('../models/movie');
 const axios = require('axios');
 const { faker } = require('@faker-js/faker');
 
@@ -16,7 +16,7 @@ const generateSearchTerm = async () => {
 };
 
 const fetchDataAndStoreInDB = async () => {
-  const MovieToStore = 200;
+  const MovieToStore = 0;
   try {
       for (let i = 0; i < MovieToStore; i++) {
           const searchTerm = await generateSearchTerm();

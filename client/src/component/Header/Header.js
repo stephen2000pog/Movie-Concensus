@@ -9,8 +9,8 @@ function Header() {
           <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto">
             <Nav.Link href="/">Accueil</Nav.Link>
-            <Nav.Link href="/movies">Films</Nav.Link>
-            <Nav.Link href="/adduser">TestAJouterUser</Nav.Link>
+            <Nav.Link href="/movies">Films</Nav.Link> 
+            <Nav.Link href="/adduser">Fonctionnalité non implementée</Nav.Link>
             <Nav.Link href="/connexion">Connexion</Nav.Link>
           </Nav>
           <Form className="d-flex">

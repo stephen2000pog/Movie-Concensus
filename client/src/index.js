@@ -12,7 +12,6 @@ import {
 import Home from './component/Home/Home';
 import ErrorPage from './component/ErrorPage/ErrorPage';
 
-import AddUserButton from './component/AddUserButton';
 
 const router = createBrowserRouter([
   {
@@ -30,10 +29,6 @@ const router = createBrowserRouter([
       {
         path: "connexion",
         element: <Connexion />,
-      },
-      {
-        path: "adduser",
-        element: <AddUserButton />,
       },
       {
         path: "*",
