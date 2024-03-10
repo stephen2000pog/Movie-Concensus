@@ -21,6 +21,7 @@ function Header() {
           <Nav className="me-auto">
             <Nav.Link href="/">Accueil</Nav.Link>
             <Nav.Link href="/movies">Films</Nav.Link>
+            <Nav.Link href="/error">Exemple Page désuette</Nav.Link>
             {!user && (
               <div>
                 <Nav.Link href="/connexion">Connexion</Nav.Link>
