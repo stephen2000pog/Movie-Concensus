@@ -2,13 +2,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../../App.css'
-import '../../Authentication.css'
+import '../../css/Authentication.css'
 import { useNavigate } from 'react-router-dom';
 import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye'
-import {useAuthContext} from '../../hooks/useAuthContext'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 function Connexion() {
   //Used : https://leanylabs.com/blog/form-validation-in-react for the form validation
@@ -26,7 +25,7 @@ function Connexion() {
   const [ptype, setType] = useState('password');
   const [icon, setIcon] = useState(eyeOff);
 
-  const {dispatch} = useAuthContext()
+  const { dispatch } = useAuthContext()
 
   const handleToggle = () => {
     if (ptype === 'password') {
@@ -70,25 +69,26 @@ function Connexion() {
   useEffect(() => {
     const finishSubmit = async () => {
       await axios.post('http://localhost:5000/login', {
-          email: inputFields.email,
-          password: inputFields.password
+        email: inputFields.email,
+        password: inputFields.password
       })
         .then(res => {
-          if(res.data.email === inputFields.email) {
-            //save to local storage
+          if (res.data.status === 200) {
             localStorage.setItem('user', JSON.stringify(res.data))
             // update the auth context
-            dispatch({type: 'LOGIN', payload: res.data})
+            dispatch({ type: 'LOGIN', payload: res.data })
             setSubmitting(false)
             navigate('/')
+          } else {
+            setSubmitting(false)
+            setResponse(res.data.msg)
           }
-          console.log(res.data)
+        })
+        .catch(err => {
+          console.log("Erreur lors de la récupération du compte", err)
           setSubmitting(false)
-          setResponse(res.data)
-          })
-        .catch(err => console.log("Dans frontend", err))
+        })
     }
-
     if (Object.keys(errors).length === 0 && submitting) {
       finishSubmit();
     }
@@ -126,15 +126,14 @@ function Connexion() {
             {errors.email}
           </p>
         ) : null}
-        { errors.password !== response ? (
+        {errors.password !== response ? (
           <p className='error'>
             {errors.password}
           </p>
         ) : null}
-        {response ? (
+        {response !== '' ? (
           <p className='error'>
-            {response.email}
-            {response.token}
+            {response}
           </p>
         ) : null}
       </form>
