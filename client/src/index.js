@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
+import './css/index.css';
 import App from './App';
 import Connexion from './component/Connexion/Connexion';
+import CreateAccount from './component/CreateAccount/CreateAccount';
 import Movies from './component/Movies/Movies';
 import {
   createBrowserRouter,
@@ -11,6 +12,7 @@ import {
 } from "react-router-dom";
 import Home from './component/Home/Home';
 import ErrorPage from './component/ErrorPage/ErrorPage';
+import Account from './component/Account/Account'
 
 
 const router = createBrowserRouter([
@@ -30,6 +32,18 @@ const router = createBrowserRouter([
         path: "connexion",
         element: <Connexion />,
       },
+      {
+        path: "create-account",
+        element: <CreateAccount />,
+      },
+      {
+        path: "/account-info",
+        element: <Account />
+      },
+      // {
+      //   path: "adduser",
+      //   element: <AddUserButton />,
+      // },
       {
         path: "*",
         element: <ErrorPage />,

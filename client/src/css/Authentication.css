@@ -1,0 +1,62 @@
+form {
+  text-align: center;
+  /* font-size: 70%; */
+  min-width: 400px;
+  max-width: 400px;
+} 
+
+h1 {
+  font-size: 25px;
+  font-weight: normal;
+  margin-bottom: 8%;
+}
+
+input {
+  font-size: 20px;
+  border-radius: 9px;
+  padding: 2%;
+  border-style: solid;
+  border-color: #D3D3D3;;
+  margin-bottom: 2%;
+  padding: 2%;
+  min-width: 400px;
+  max-width: 400px;
+  /* width: 50%; */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+li a {
+  text-decoration: none;
+  color:#097CE0;
+}
+
+a:visited { 
+  text-decoration: 
+  none; color:#097CE0; 
+}
+
+a:hover, a:active { 
+  text-decoration: none; 
+  color:gray 
+}
+
+.error {
+  color: red;
+  font-size: small; 
+}
+
+.p-viewer {
+  position: relative;
+  color: black;
+  margin: -14% 2% 0% 0%;
+  float: right;
+}
+
+

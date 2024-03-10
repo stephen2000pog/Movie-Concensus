@@ -1,34 +1,29 @@
-
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/Authentication.css'
 import { useNavigate } from 'react-router-dom';
 import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye'
-import { useAuthContext } from '../../hooks/useAuthContext'
 
-function Connexion() {
-  //Used : https://leanylabs.com/blog/form-validation-in-react for the form validation
-  //Used : https://codesandbox.io/p/sandbox/showhide-password-on-toggle-in-react-hooks-95qcz?file=%2Fsrc%2FApp.js and
-  //          https://dev.to/annaqharder/hideshow-password-in-react-513a to hide/show the password with eye icon
-  //Used : https://www.youtube.com/@NetNinja MERN Authentication tutorials and https://www.youtube.com/@WebDevSimplified JWT Authentication tutorials for authentication
+export default function Authentication() {
+
+  //Utilisé : https://leanylabs.com/blog/form-validation-in-react pour la validation du formulaire
   const [inputFields, setInputFields] = useState({
     email: "",
-    password: "",
+    username: "",
+    password: ""
   });
+
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
-  const [response, setResponse] = useState();
-  const [ptype, setType] = useState('password');
+  const [response, setResponse] = useState({});
+  const [type, setType] = useState('password');
   const [icon, setIcon] = useState(eyeOff);
 
-  const { dispatch } = useAuthContext()
-
   const handleToggle = () => {
-    if (ptype === 'password') {
+    if (type === 'password') {
       setIcon(eye);
       setType('text')
     } else {
@@ -47,12 +42,18 @@ function Connexion() {
     return re.test(password)
   }
 
+  function validateUsername(username) {
+    var re = /^[A-Za-z0-9._]{4,25}$/;
+    return re.test(username);
+  }
   const validateFormat = (inputValues) => {
     let errors = {};
     if (!validateEmailFormat(inputValues.email))
-      errors.email = "Adresse courriel invalide";
+      errors.email = "Format courriel : example@example.example";
     if (!validatePSWFormat(inputValues.password))
-      errors.password = "Mot de passe invalide";
+      errors.password = "De 6 à 15 caractères. Acceptés : Aa-Zz, 0-9 et !@#$%?&*";
+    if (!validateUsername(inputValues.username))
+      errors.username = "De 4 à 25 caractères. Acceptés : Aa-Zz, 0-9, . et _";
     return errors;
   }
 
@@ -67,36 +68,42 @@ function Connexion() {
   };
 
   useEffect(() => {
-    const finishSubmit = async () => {
-      await axios.post('http://localhost:5000/login', {
+    const finishSubmit = () => {
+      axios.post('http://localhost:5000/signup', {
+        username: inputFields.username,
         email: inputFields.email,
         password: inputFields.password
       })
         .then(res => {
-          if (res.data.status === 200) {
-            localStorage.setItem('user', JSON.stringify(res.data))
-            // update the auth context
-            dispatch({ type: 'LOGIN', payload: res.data })
-            setSubmitting(false)
-            navigate('/')
-          } else {
-            setSubmitting(false)
-            setResponse(res.data.msg)
+          if (res.data === "User added!") {
+            navigate('/connexion');
+            alert('Votre compte a été créé avec succès');
           }
+          setResponse(res.data);
         })
         .catch(err => {
-          console.log("Erreur lors de la récupération du compte", err)
-          setSubmitting(false)
+          console.log("Dans frontend", err)
         })
+      setSubmitting(false);
     }
     if (Object.keys(errors).length === 0 && submitting) {
       finishSubmit();
     }
-  }, [inputFields, errors, submitting, navigate, response, dispatch]);
+  }, [inputFields, errors, submitting, navigate, response]);
+
   return (
     <div className="App-header">
-      <form id='form' onSubmit={handleSubmit} className='connection'>
-        <h1>Connectez-vous avec votre compte Movies Consensus</h1>
+      <form id='form' onSubmit={handleSubmit} className='create-account'>
+        <h1>Créer un compte</h1>
+        <input
+          className='identification'
+          type='text'
+          name='username'
+          value={inputFields.username}
+          onChange={handleChange}
+          placeholder="Nom d'utilisateur"
+        />
+        <br />
         <input
           className='identification'
           type='text'
@@ -108,7 +115,7 @@ function Connexion() {
         <br />
         <input
           className='identification'
-          type={ptype === 'password' ? 'password' : 'text'}
+          type={type === 'password' ? 'password' : 'text'}
           name='password'
           value={inputFields.password}
           onChange={handleChange}
@@ -118,27 +125,38 @@ function Connexion() {
           <Icon className="p-viewer" icon={icon} size={30} />
         </span>
         <br />
-        <input type='submit' value="Connexion" />
-        <li>Pas de compte? <Link to="/create-account">Créez-en un</Link></li>
-        <li><Link to="/connexion">Mot de passe oublié?</Link></li>
+        <input type='submit' value="Créer votre compte" />
+        {errors.username ? (
+          <p className='error'>
+            {errors.username}
+          </p>
+        ) : null}
         {errors.email ? (
           <p className='error'>
             {errors.email}
           </p>
         ) : null}
-        {errors.password !== response ? (
+        {errors.password ? (
           <p className='error'>
             {errors.password}
           </p>
         ) : null}
-        {response !== '' ? (
+        {response.username ? (
           <p className='error'>
-            {response}
+            {response.username}
+          </p>
+        ) : null}
+        {response.email ? (
+          <p className='error'>
+            {response.email}
+          </p>
+        ) : null}
+        {response.password ? (
+          <p className='error'>
+            {response.password}
           </p>
         ) : null}
       </form>
     </div>
-  );
+  )
 }
-
-export default Connexion;
