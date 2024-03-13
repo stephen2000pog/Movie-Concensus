@@ -1,22 +1,15 @@
 const mongoose = require('mongoose');
-const Movie = require('../models/Movie');
+const Movie = require('../models/movie');
 const axios = require('axios');
 const { faker } = require('@faker-js/faker');
 
-const getRandomLetter = () => {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-  const randomIndex = Math.floor(Math.random() * alphabet.length);
-  return alphabet[randomIndex];
-};
-
 const generateSearchTerm = async () => {
-  //const randomWord = faker.word.words(1); 
-  const randomWord = getRandomLetter() + getRandomLetter();
+  const randomWord = faker.word.words(1); 
   return randomWord;
 };
 
 const fetchDataAndStoreInDB = async () => {
-  const MovieToStore = 200;
+  const MovieToStore = 0;
   try {
       for (let i = 0; i < MovieToStore; i++) {
           const searchTerm = await generateSearchTerm();
