@@ -12,7 +12,7 @@ router.get('/api/movies', async (req, res) => {
   }
 });
 
-router.get('/api/movies/:id', async (req, res) => {
+router.get('/api/movie/:id', async (req, res) => {
   try {
     const movie = await Movies.findById(req.params.id);
     res.json(movie);
