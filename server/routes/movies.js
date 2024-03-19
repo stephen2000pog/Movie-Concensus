@@ -12,4 +12,14 @@ router.get('/api/movies', async (req, res) => {
   }
 });
 
+router.get('/api/movies/:id', async (req, res) => {
+  try {
+    const movie = await Movies.findById(req.params.id);
+    res.json(movie);
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;
