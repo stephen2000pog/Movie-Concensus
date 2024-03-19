@@ -1,9 +1,13 @@
-ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 20px; 
-  }
-  
+.movies-container {
+  display: flex;
+  overflow-x: auto;
+  width: 100%;
+  white-space: nowrap;
+  scrollbar-width: auto; /* Largeur du curseur */
+  scrollbar-color: #888 transparent; /* Couleur du curseur */
+}
+
+
+.movie {
+}
+

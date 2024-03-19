@@ -1,5 +1,5 @@
 const express = require('express');
-const UserModel = require('../models/user'); // Assurez-vous d'ajuster le chemin
+const UserModel = require('../models/user'); 
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const generator = require('generate-password')

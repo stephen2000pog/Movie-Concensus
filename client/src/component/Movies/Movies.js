@@ -17,15 +17,14 @@ const MovieList = () => {
 
     fetchData();
   }, []);
-
   return (
-    <div className="App-header">
-      <ul style={{ listStyleType: 'none', padding: 0 }}>
+    <div className="App-header container-fluid movie-app">
+      <h2>Liste des Films</h2>
+      <div className="movies-container">
         {movies.slice(0, 100).map((movie) => (
-          <li key={movie._id} style={{ marginBottom: '20px' }}>
+          <div key={movie._id} className="d-flex justify-content-start m-1">
             {movie.Poster !== 'N/A' && movie.Poster && (
               <>
-                <h3>{movie.Title}</h3>
                 <img
                   src={movie.Poster}
                   alt={`${movie.Title} Poster`}
@@ -33,11 +32,14 @@ const MovieList = () => {
                 />
               </>
             )}
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
+  
+
+  
 };
 
 export default MovieList;
