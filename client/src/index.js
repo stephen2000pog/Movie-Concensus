@@ -6,6 +6,7 @@ import App from './App';
 import Connexion from './component/Connexion/Connexion';
 import CreateAccount from './component/CreateAccount/CreateAccount';
 import Movies from './component/Movies/Movies';
+import MovieDetails from './component/Movies/MovieDetails'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "movies",
         element: <Movies />,
+      },
+      {
+        path: "movies/:id",
+        element: <MovieDetails />,
       },
       {
         path: "connexion",

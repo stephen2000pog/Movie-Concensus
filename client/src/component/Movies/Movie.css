@@ -7,4 +7,6 @@
   scrollbar-color: #888 transparent; /* Couleur du curseur */
 }
 
-
+.text-left {
+  text-align: left;
+}
