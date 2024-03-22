@@ -45,10 +45,6 @@ const router = createBrowserRouter([
         path: "/account-info",
         element: <Account />
       },
-      // {
-      //   path: "adduser",
-      //   element: <AddUserButton />,
-      // },
       {
         path: "*",
         element: <ErrorPage />,
