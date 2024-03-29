@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Dropdown from 'react-bootstrap/Dropdown';
+import SearchBar from '../SearchBar/SearchBar';
 
 function Header() {
 
@@ -42,15 +43,7 @@ function Header() {
             </Dropdown>
           )}
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Recherche"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Recherche</Button>
-          </Form>
+          <SearchBar></SearchBar>
         </Navbar.Collapse>
       </Container>
     </Navbar>

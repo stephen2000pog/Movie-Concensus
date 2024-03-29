@@ -14,6 +14,8 @@ import {
 import Home from './component/Home/Home';
 import ErrorPage from './component/ErrorPage/ErrorPage';
 import Account from './component/Account/Account'
+import SearchBar from './component/SearchBar/SearchBar';
+import SearchResults from './component/SearchResults/SearchResults';
 
 
 const router = createBrowserRouter([
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "movies/:id",
         element: <MovieDetails />,
+      },
+      {
+        path: "search-results/:searchTerm",
+        element: <SearchResults />,
       },
       {
         path: "connexion",
