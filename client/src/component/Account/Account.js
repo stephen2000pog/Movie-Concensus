@@ -1,19 +1,17 @@
 import React from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { useNavigate } from 'react-router-dom';
+import ErrorPage from '../ErrorPage/ErrorPage'
 
 const Profile = () => {
-    const {user} = useAuthContext();
-    const navigate = useNavigate();
-
+    const { user } = useAuthContext();
     return (
         <div>
             {user && (
-                <h1> Welcome, {user.username} !</h1>
+                <h1> Welcome, {user.email} !</h1>
             )}
             {!user && (
-                navigate('/connexion')
-            ) }
+                <ErrorPage />
+            )}
         </div>
     );
 };

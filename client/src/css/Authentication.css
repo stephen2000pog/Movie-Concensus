@@ -38,8 +38,8 @@ li a {
 }
 
 a:visited { 
-  text-decoration: 
-  none; color:#097CE0; 
+  text-decoration: none; 
+  color:#097CE0; 
 }
 
 a:hover, a:active { 
