@@ -20,6 +20,7 @@ const SearchBar = ({ onSearch }) => {
     event.preventDefault();
     onSearch(searchTerm, searchType);
   };
+  
 
   return (
     <Form className="d-flex" onSubmit={handleSubmit}>
@@ -39,7 +40,7 @@ const SearchBar = ({ onSearch }) => {
         value={searchTerm}
         onChange={handleChange}
       />
-      <Link to={`/search-results/${searchTerm}`}>
+      <Link to={`/search-results/${searchType}/${searchTerm}`}>
         <Button variant="outline-success">Recherche</Button>
       </Link>
     </Form>
