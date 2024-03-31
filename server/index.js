@@ -8,6 +8,7 @@ const auth = require('./routes/connection.js');
 const userInfo = require('./routes/user.js');
 const { fetchDataAndStoreInDB } = require('./routes/addMovieInDb.js');
 const movieRoutes = require('./routes/movies');
+const searchRoutes = require('./routes/searchMovies');
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +22,7 @@ const mongoURI = 'mongodb+srv://admin1:admin1@cluster0.sbmpwv4.mongodb.net/?retr
 mongoose.connect(mongoURI);
 
 app.use('/', movieRoutes);
+app.use('/', searchRoutes);
 
 app.listen(port, () => {
   console.log(`Le serveur Express est en cours d'exécution sur http://localhost:${port}`);
