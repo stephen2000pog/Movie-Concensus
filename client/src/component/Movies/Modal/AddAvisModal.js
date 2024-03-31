@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Button, Form, Modal} from 'react-bootstrap';
 
-function AddAvisModal({titleFilm,idMovie, email, showModal, closeModal, handleActionBtnModalAvis}) {
+function AddAvisModal({titleFilm,idMovie, email, showModal, closeModal, handleActionBtnModalAvis,avis,note}) {
 
   const [nouvelAvis, setNouvelAvis] =
-      useState({email: email,idMovie:idMovie, avis: '', note: 0});
+      useState({email: email,idMovie:idMovie, avis: avis, note: note});
 
   const handleChange = (e) => {
     const {name, value} = e.target;

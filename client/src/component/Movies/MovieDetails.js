@@ -64,7 +64,6 @@ const MovieDetails = () => {
   };
 
   const ajoutAvis = (nouvelAvis) => {
-    // Ajouter le nouvel avis au tableau des avis
    
     const AjoutCall = async () => {
       try {
@@ -72,7 +71,7 @@ const MovieDetails = () => {
         const response = await axios.post(`http://localhost:5000/api/avis/add`,nouvelAvis);
         console.log(response.data);
       } catch (error) {
-        console.error('Error fetching movies from API:', error);
+        console.error('Error add or update  avis from API:', error);
       }
     };
     AjoutCall();
@@ -80,8 +79,24 @@ const MovieDetails = () => {
     closeModal();
   };
 
+  const deleteAvis = () => {
+
+    const deleteCall = async () => {
+      try {
+        const response = await axios.delete(`http://localhost:5000/api/avis/${listeAvis[0]._id}`);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error delete avis from API:', error);
+      }
+    };
+    deleteCall();
+    
+    setListeAvis([]);
+    window.alert("Votre avis est en cours de suppression");
+    
+  };
+
   const updateAvis = (nouvelAvis) => {
-    // Ajouter le nouvel avis au tableau des avis
    
     const updateCall = async () => {
       try {
@@ -131,13 +146,16 @@ const MovieDetails = () => {
         showModal={showModal}
         closeModal={closeModal}
         handleActionBtnModalAvis={listeAvis.length === 0 ? ajoutAvis : updateAvis}
+        avis={listeAvis.length === 0 ? '' : listeAvis[0].avis}
+        note={listeAvis.length === 0 ? 0 : parseInt(listeAvis[0].note)}
         
       />        
 
     <AvisFilm listeAvis={listeAvis}/> 
     {listeAvis.length === 0 ? 
           (<button onClick={openModal} className="btn btn-primary text-center" >Ajouter mon avis</button>) :
-           (<button onClick={openModal} className="btn btn-primary text-center" >Mettre à jour mon avis</button>)}
+           (<div><button onClick={openModal} className="btn btn-primary text-center" >Mettre à jour mon avis</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;<button onClick={deleteAvis} className="btn btn-danger text-center" >Supprimer mon avis</button></div>)}
     </div>
   );
 };
