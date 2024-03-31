@@ -12,13 +12,22 @@ router.get('/api/user:email', (req, res) => {
     const email = req.params.email;
     UserModel.findOne({ email: email })
         .then(user => {
-            res.json({user, status: 200})
+            res.json({ user, status: 200 })
+        })
+        .catch(() => res.json({ msg: "Erreur innatendue côté serveur", status: 500 }))
+})
+
+router.delete('/api/user:email', (req, res) => {
+    const email = req.params.email;
+    console.log(email)
+    UserModel.deleteOne({ email: email })
+        .then(() => {
+            res.json({ msg: "Compte utilistateur supprimé", status: 200 })
         })
         .catch(() => res.json({ msg: "Erreur innatendue côté serveur", status: 500 }))
 })
 
 // router.get('/api/users/watchlist', getWatchlist)
 // router.post('api/users/watchlist', addToWatchlist)
-// router.delete('api/users/watchlist', removeFromWatchlist)
 
 module.exports = router;

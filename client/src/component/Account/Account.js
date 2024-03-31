@@ -2,24 +2,36 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import { useNavigate } from 'react-router-dom';
+import { useLogout } from '../../hooks/useLogout';
 
 const Profile = () => {
     const { user } = useAuthContext();
     const [info, setInfo] = useState([])
+    const [error, setError] = useState([])
+    const navigate = useNavigate()
+    const { logout } = useLogout()
 
     const handleDelete = async () => {
-        const response = await axios.delete(`http://localhost:5000/api/user${user.email}`, {
+        await axios.delete(`http://localhost:5000/api/user${user.email}`, {
             params: {
                 email: user.email
             }
             // headers: {
             //     'Auhtorization': `Bearer ${user.token}`
             // }
+        }).then((response) => {
+            if (response.data.status === 200) {
+                console.log("Account deleted successfully")
+                logout()
+                navigate('/');
+                alert('Votre compte a été supprimé avec succès');
+            } else {
+                setError("Erreur lors de la suppresion du compte");
+            }
+        }).catch(() => {
+            setError("Erreur lors de la suppresion du compte");
         })
-        if (response.data.status === 200) {
-            console.log("Account Deleted successfully")
-        }
-        setInfo(response.data.user)
     }
 
     useEffect(() => {
@@ -33,9 +45,8 @@ const Profile = () => {
                 // }
             })
             if (response.data.status === 200) {
-                console.log("response.data")
+                setInfo(response.data.user)
             }
-            setInfo(response.data.user)
         }
         if (user) {
             fetchInfo()
@@ -52,6 +63,11 @@ const Profile = () => {
                     <span onClick={handleDelete}>
                         <input className="delete" type='submit' value="Supprimer compte" />
                     </span>
+                    {error ? (
+                        <p className='error'>
+                            {error}
+                        </p>
+                    ) : null}
                 </div>
             )}
             {!user && (
