@@ -14,6 +14,7 @@ import {
 import Home from './component/Home/Home';
 import ErrorPage from './component/ErrorPage/ErrorPage';
 import Account from './component/Account/Account'
+import Watchlist from './component/Watchlist/Watchlist'
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/account-info",
         element: <Account />
+      },
+      {
+        path: "/watchlist",
+        element: <Watchlist />
       },
       {
         path: "*",
