@@ -17,7 +17,7 @@ function Header() {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="#home">MOVIE-CONCENSUS</Navbar.Brand>
+        <Navbar.Brand href="/">MOVIE-CONCENSUS</Navbar.Brand>
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto">
             <Nav.Link href="/">Accueil</Nav.Link>
