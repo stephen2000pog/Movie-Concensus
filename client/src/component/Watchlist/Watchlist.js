@@ -32,7 +32,6 @@ const Watchlist = () => {
         <div className="App-header">
             <h1>Votre liste de visionnement</h1>
             {user && (
-                // watchlist.map(movie) => 
                 <ul className='watchlist'>
                     {watchlist.map(function (movie, i) {
                         return <li key={movie._id}>
@@ -50,9 +49,6 @@ const Watchlist = () => {
                     })}
                 </ul>
             )}
-            {/* {watchlist.length && (
-                <h2>Liste de visionnement vide </h2>
-            )} */}
             {!user && (
                 <ErrorPage />
             )}
