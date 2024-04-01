@@ -1,3 +1,20 @@
+div {
+  position: relative;
+}
+a #addWatchlist {
+  position: absolute;
+  min-width: 40px;
+  max-width: 40px;
+  background-color: black;
+  opacity: 0.8;
+  color: white;
+  border-color:#888;
+}
+a #addWatchlist:hover {
+  background-color: black;
+  border-color: white;
+}
+
 .movies-container {
   display: flex;
   overflow-x: auto;

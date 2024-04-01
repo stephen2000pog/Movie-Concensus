@@ -5,28 +5,28 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 
 const Watchlist = () => {
     const { user } = useAuthContext();
-    const [info, setInfo] = useState([])
+    const [watchlist, setWatchlist] = useState([])
     useEffect(() => {
-        const fetchInfo = async () => {
-            const response = await axios.get('http://localhost:5000/api/user', {
-                headers: {
-                    'Auhtorization': `Bearer ${user.token}`
-                }
+        const fetchWatchlist = async () => {
+            const response = await axios.get('http://localhost:5000/api/user/watchlist', {
+                // headers: {
+                //     'Auhtorization': `Bearer ${user.token}`
+                // }
             })
             const json = await response.json();
 
             if(response.ok) {
-                console.log(json)
+                // console.log(json)
+                setWatchlist(response.data.watchlist)
             }
-            setInfo(json)
         }
         if(user) {
-          fetchInfo()
+          fetchWatchlist()
         }
     }, [])
 
     return (
-        <div>
+        <div className="App-header">
             {user && (
                 <h1> Liste de visionnement </h1>
             )}

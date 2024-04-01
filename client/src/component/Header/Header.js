@@ -1,4 +1,4 @@
-import { Button, Container, Form, Navbar } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthContext } from '../../hooks/useAuthContext';
@@ -17,7 +17,7 @@ function Header() {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="/">MOVIE-CONCENSUS</Navbar.Brand>
+        <Navbar.Brand href="">MOVIE-CONCENSUS</Navbar.Brand>
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto">
             <Nav.Link href="/">Accueil</Nav.Link>

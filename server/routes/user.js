@@ -1,5 +1,6 @@
 const express = require('express');
 const UserModel = require('../models/user');
+const MovieModel = require('../models/movie')
 const router = express.Router();
 // const requireAuth = require('../middleware/requireAuth');
 
@@ -28,6 +29,17 @@ router.delete('/api/user:email', (req, res) => {
 })
 
 // router.get('/api/users/watchlist', getWatchlist)
-// router.post('api/users/watchlist', addToWatchlist)
+router.post('api/users/watchlist', (req, res) => {
+    const {_id, email} = req.body;
+    console.log("test add to watchlist")
+    MovieModel.findbyId({ _id })
+        .then(movie => {
+            UserModel.updateOne({email: email}, {
+                watchlist: _id
+            })
+            res.json({ msg: "Compte utilistateur supprimé", status: 200 })
+        })
+        .catch(() => res.json({ msg: "Erreur innatendue côté serveur", status: 500 }))
+})
 
 module.exports = router;
