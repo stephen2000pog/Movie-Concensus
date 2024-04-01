@@ -1,18 +1,22 @@
-div {
-  position: relative;
-}
-a #addWatchlist {
+
+#addWatchlist {
   position: absolute;
   min-width: 40px;
   max-width: 40px;
   background-color: black;
-  opacity: 0.8;
+  opacity: 0.7;
   color: white;
   border-color:#888;
+  border-style: solid;
 }
-a #addWatchlist:hover {
-  background-color: black;
+
+#addWatchlist:hover {
+  opacity: 0.6;
   border-color: white;
+}
+
+.movies-container .movie-link {
+  text-align: left;
 }
 
 .movies-container {
@@ -22,6 +26,7 @@ a #addWatchlist:hover {
   white-space: nowrap;
   scrollbar-width: auto; /* Largeur du curseur */
   scrollbar-color: #888 transparent; /* Couleur du curseur */
+  z-index: 10;
 }
 
 .text-left {

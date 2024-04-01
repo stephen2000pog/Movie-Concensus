@@ -8,25 +8,26 @@ const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const { user } = useAuthContext();
 
-  const handleClick = (e) => async () => {
-    e.preventDefault();
-    await axios.post(`http://localhost:5000/api/user/watchlist$`, {
-      id: movies._id,
+  const addMovieToWatchlist = async (_id) => {
+    await axios.post('http://localhost:5000/api/user/watchlist', {
+      _id: _id,
       email: user.email
-        // headers: {
-        //     'Auhtorization': `Bearer ${user.token}`
-        // }
-    }).then((response) => {
-        if (response.data.status === 200) {
-            console.log("Movie Added successfully")
-            alert('MOvie succesfully added to watchlist');
-        } else {
-            console.log("Erreur lors de l'ajout à la liste de visionnement");
-        }
-    }).catch(error => {
-        console.log(error)
+      // headers: {
+      //     'Auhtorization': `Bearer ${user.token}`
+      // }
     })
-    console.log("added to watchlist");
+      .then((response) => {
+        console.log(_id)
+        if (response.data.status === 200) {
+          console.log("Movie Added successfully")
+          alert('MOvie succesfully added to watchlist');
+        } else {
+          console.log("Erreur lors de l'ajout à la liste de visionnement");
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
   };
 
   useEffect(() => {
@@ -47,22 +48,24 @@ const MovieList = () => {
       <h2>Liste des Films</h2>
       <div className="movies-container">
         {movies.slice(0, 100).map((movie) => (
-          <Link to={`/movies/${movie._id}`} key={movie._id}>
-            <div className="d-flex justify-content-start m-1">
-              {user && (
-                <span onClick={handleClick}>
-                  <input id="addWatchlist" type='submit' value="+" />
-                </span>
-              )}
-              {movie.Poster !== 'N/A' && movie.Poster && (
-                <img
-                  src={movie.Poster}
-                  alt={`${movie.Title} Poster`}
-                  style={{ width: '200px', height: '300px' }}
-                />
-              )}
-            </div>
-          </Link>
+          <div className="movie-link">
+            {user && (
+              <span onClick={() => addMovieToWatchlist(movie._id)}>
+                <button id="addWatchlist" value="+" >+</button>
+              </span>
+            )}
+            <Link to={`/movies/${movie._id}`} key={movie._id}>
+              <div className="d-flex justify-content-start m-1">
+                {movie.Poster !== 'N/A' && movie.Poster && (
+                  <img
+                    src={movie.Poster}
+                    alt={`${movie.Title} Poster`}
+                    style={{ width: '200px', height: '300px' }}
+                  />
+                )}
+              </div>
+            </Link>
+          </div>
         ))}
       </div>
     </div>

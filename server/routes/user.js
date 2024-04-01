@@ -29,17 +29,15 @@ router.delete('/api/user:email', (req, res) => {
 })
 
 // router.get('/api/users/watchlist', getWatchlist)
-router.post('api/users/watchlist', (req, res) => {
-    const {_id, email} = req.body;
+router.post('/api/user/watchlist', (req, res) => {
+    const { _id, email } = req.body;
     console.log("test add to watchlist")
-    MovieModel.findbyId({ _id })
-        .then(movie => {
-            UserModel.updateOne({email: email}, {
-                watchlist: _id
-            })
-            res.json({ msg: "Compte utilistateur supprimé", status: 200 })
-        })
-        .catch(() => res.json({ msg: "Erreur innatendue côté serveur", status: 500 }))
+    UserModel.updateOne({ email: email }, {
+        $push: {watchlist: _id}
+    }).then(() => {
+        res.json({ msg: "Movie added to watchlist", status: 200 })
+    })
+        .catch((error) => res.json({ msg: error, status: 500 }))
 })
 
 module.exports = router;
