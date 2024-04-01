@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Watchlist.css'
+import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import ErrorPage from '../ErrorPage/ErrorPage';
 
@@ -8,28 +10,49 @@ const Watchlist = () => {
     const [watchlist, setWatchlist] = useState([])
     useEffect(() => {
         const fetchWatchlist = async () => {
-            const response = await axios.get('http://localhost:5000/api/user/watchlist', {
+            const response = await axios.get(`http://localhost:5000/api/user/watchlist${user.email}`, {
+                params: {
+                    email: user.email
+                }
                 // headers: {
                 //     'Auhtorization': `Bearer ${user.token}`
                 // }
             })
-            const json = await response.json();
-
-            if(response.ok) {
-                // console.log(json)
-                setWatchlist(response.data.watchlist)
+            if (response.data.status === 200) {
+                setWatchlist(response.data.movies)
             }
+            console.log(response.data)
         }
-        if(user) {
-          fetchWatchlist()
+        if (user) {
+            fetchWatchlist()
         }
-    }, [])
+    }, [user])
 
     return (
         <div className="App-header">
+            <h1>Votre liste de visionnement</h1>
             {user && (
-                <h1> Liste de visionnement </h1>
+                // watchlist.map(movie) => 
+                <ul className='watchlist'>
+                    {watchlist.map(function (movie, i) {
+                        return <li key={movie._id}>
+                            <Link to={`/movies/${movie._id}`} key={movie._id}><img
+                                src={movie.Poster}
+                                alt={`${movie.Title} Poster`}
+                                style={{ width: '160px', height: '240px' }}
+                            />
+                                <h2>{movie.Title}</h2>
+                            </Link>
+                            <p>{movie.Year} &emsp; {movie.Runtime} &emsp; {movie.Rated} &emsp; {movie.Genre}</p>
+                            <p>Director : {movie.Director} &emsp; Actors : {movie.Actors}</p>
+                            <p>{movie.Plot}</p>
+                        </li>
+                    })}
+                </ul>
             )}
+            {/* {watchlist.length && (
+                <h2>Liste de visionnement vide </h2>
+            )} */}
             {!user && (
                 <ErrorPage />
             )}
