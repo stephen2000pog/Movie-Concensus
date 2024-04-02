@@ -20,7 +20,7 @@ const MovieList = () => {
         console.log(_id)
         if (response.data.status === 200) {
           console.log("Movie Added successfully")
-          alert('MOvie succesfully added to watchlist');
+          alert('Film ajouté à la liste de visionnement');
         } else {
           console.log("Erreur lors de l'ajout à la liste de visionnement");
         }

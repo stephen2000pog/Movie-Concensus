@@ -25,6 +25,7 @@ const Watchlist = () => {
         }).then((response) => {
             if (response.data.status === 200) {
                 console.log("Movie removed from wathclist")
+                window.location.reload()
             } else {
                 setError("Erreur lors de la suppresion du film");
             }

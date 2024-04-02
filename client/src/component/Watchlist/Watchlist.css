@@ -1,5 +1,5 @@
 .App-header .watchlist {
-    width: 800px;
+    width: 1000px;
     padding: 0%;
     list-style: none;
 }
@@ -10,26 +10,28 @@
 }
 
 li {
+    width: 1000px;
     margin-top: 10px;
     display: inline-block;
     text-align: justify;
     font-size: medium;
 }
-li img {
+li a img {
     float: left;
     margin-right: 10px;
 }
 h2 {
     margin-top: 10px;
 }
-a {
+ul li a {
     text-decoration: none;
     color: white;
 }
-a:visited {
+ul li a:visited {
     color: white;
 }
 
 a h2:hover {
  text-decoration: underline;
+ color: white;
 }
