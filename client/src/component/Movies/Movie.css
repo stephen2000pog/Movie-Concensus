@@ -17,6 +17,7 @@
 
 .movies-container .movie-link {
   text-align: left;
+  position: relative;
 }
 
 .movies-container {
