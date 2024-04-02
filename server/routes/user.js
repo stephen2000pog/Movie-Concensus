@@ -37,7 +37,6 @@ router.get('/api/user/watchlist:email', async (req, res) => {
             for (let i = 0; i < watchlist.length; i++) {
                 const movie = await MovieModel.findById(watchlist[i])
                 movies.push(movie)
-                console.log(movie.Title)
             }
             res.json({ movies, status: 200 })
         })
@@ -48,13 +47,29 @@ router.get('/api/user/watchlist:email', async (req, res) => {
 
 router.post('/api/user/watchlist', (req, res) => {
     const { _id, email } = req.body;
-    console.log("test add to watchlist")
     UserModel.updateOne({ email: email }, {
-        $push: { watchlist: _id }
+        $push: {
+            watchlist: { _id: _id }
+        }
     }).then(() => {
         res.json({ msg: "Movie added to watchlist", status: 200 })
     })
         .catch((error) => res.json({ msg: error, status: 500 }))
+})
+
+router.delete('/api/user/watchlist:email/:_id', (req, res) => {
+    UserModel.updateOne({ email: req.params.email }, {
+        $pull: {
+            watchlist: { _id: req.params._id }
+        }
+    })
+        .then(() => {
+            res.json({ status: 200 })
+        })
+        .catch(() => {
+            console.log("error")
+            res.json({ msg: "Erreur innatendue côté serveur", status: 500 })
+        })
 })
 
 module.exports = router;
