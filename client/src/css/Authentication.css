@@ -11,6 +11,11 @@ h1 {
   margin-bottom: 8%;
 }
 
+h2 {
+  text-align-last: left;
+  font-size: 20px;
+}
+
 input {
   font-size: 20px;
   border-radius: 9px;
@@ -26,6 +31,18 @@ input {
   -moz-box-sizing: border-box;
 }
 
+.delete {
+  margin-top: 50px;
+  min-width: 200px;
+  max-width: 200px;
+  background-color: crimson;
+  color: white;
+  border-color: crimson;
+}
+.delete:hover {
+  border-color: white;
+}
+
 li {
   list-style: none;
   font-size: 20px;
@@ -38,8 +55,8 @@ li a {
 }
 
 a:visited { 
-  text-decoration: 
-  none; color:#097CE0; 
+  text-decoration: none; 
+  color:#097CE0; 
 }
 
 a:hover, a:active { 

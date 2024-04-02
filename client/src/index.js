@@ -6,6 +6,7 @@ import App from './App';
 import Connexion from './component/Connexion/Connexion';
 import CreateAccount from './component/CreateAccount/CreateAccount';
 import Movies from './component/Movies/Movies';
+import MovieDetails from './component/Movies/MovieDetails'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -13,6 +14,8 @@ import {
 import Home from './component/Home/Home';
 import ErrorPage from './component/ErrorPage/ErrorPage';
 import Account from './component/Account/Account'
+import SearchResults from './component/SearchResults/SearchResults';
+import Watchlist from './component/Watchlist/Watchlist'
 
 
 const router = createBrowserRouter([
@@ -29,6 +32,14 @@ const router = createBrowserRouter([
         element: <Movies />,
       },
       {
+        path: "movies/:id",
+        element: <MovieDetails />,
+      },
+      {
+        path: "search-results/:searchType/:searchTerm",
+        element: <SearchResults />,
+      },
+      {
         path: "connexion",
         element: <Connexion />,
       },
@@ -40,10 +51,10 @@ const router = createBrowserRouter([
         path: "/account-info",
         element: <Account />
       },
-      // {
-      //   path: "adduser",
-      //   element: <AddUserButton />,
-      // },
+      {
+        path: "/watchlist",
+        element: <Watchlist />
+      },
       {
         path: "*",
         element: <ErrorPage />,

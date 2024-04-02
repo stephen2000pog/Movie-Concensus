@@ -1,62 +1,75 @@
 const express = require('express');
-const UserModel = require('../models/user'); // Assurez-vous d'ajuster le chemin
+const UserModel = require('../models/user');
+const MovieModel = require('../models/movie');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const generator = require('generate-password')
+// const requireAuth = require('../middleware/requireAuth');
 
 router.use(express.json())
 
-const secret = generator.generate({
-  length: 36,
-  numbers: true
-});
+// requireAuth for all user data
+// router.use(requireAuth)
 
-const createToken = (_id) => {
-  return jwt.sign(_id, secret)
-}
-
-router.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  UserModel.findOne({ email: email })
-    .then(user => {
-      if (user) {
-        if (user.password === password) {
-          const _id = { _id: user._id }
-          const token = createToken(_id)
-          res.json({ email, token, status: 200 })
-        } else {
-          res.json({ msg: "Mot de passe invalide", status: 400 })
-        }
-      } else {
-        res.json({ msg: "Compte introuvable", status: 400 })
-      }
-    })
-    .catch(() => res.json({ msg: "Erreur innatendue côté serveur", status: 500 }))
+router.get('/api/user:email', (req, res) => {
+    const email = req.params.email;
+    UserModel.findOne({ email: email })
+        .then(user => {
+            res.json({ user, status: 200 })
+        })
+        .catch(() => res.json({ msg: "Erreur innatendue côté serveur", status: 500 }))
 })
 
-router.post('/signup', async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-    let errors = {};
-    if ((await UserModel.find({ username: username })).length) {
-      errors.username = "Le nom d'utilisateur est déjà pris.";
-    }
-    if ((await UserModel.find({ email: email })).length) {
-      errors.email = "Cette adresse courriel est déjà utilisée.";
-    }
-    if ((await UserModel.find({ password: password })).length) {
-      errors.password = "Ce mot de passe est indisponible.";
-    }
-    if (Object.keys(errors).length > 0) {
-      res.json(errors);
-    } else {
-      const user = new UserModel({ username, email, password });
-      user.save();
-      res.json("User added!");
-    }
-  } catch (err) {
-    err => res.json(err);
-  }
-});
+router.delete('/api/user:email', (req, res) => {
+    const email = req.params.email;
+    console.log(email)
+    UserModel.deleteOne({ email: email })
+        .then(() => {
+            res.json({ msg: "Compte utilistateur supprimé", status: 200 })
+        })
+        .catch(() => res.json({ msg: "Erreur innatendue côté serveur", status: 500 }))
+})
+
+router.get('/api/user/watchlist:email', async (req, res) => {
+    const email = req.params.email;
+    UserModel.findOne({ email: email })
+        .then(async user => {
+            const watchlist = user.watchlist
+            const movies = []
+            for (let i = 0; i < watchlist.length; i++) {
+                const movie = await MovieModel.findById(watchlist[i])
+                movies.push(movie)
+            }
+            res.json({ movies, status: 200 })
+        })
+        .catch(() => {
+            res.json({ msg: "Erreur innatendue côté serveur", status: 500 })
+        })
+})
+
+router.post('/api/user/watchlist', (req, res) => {
+    const { _id, email } = req.body;
+    UserModel.updateOne({ email: email }, {
+        $push: {
+            watchlist: { _id: _id }
+        }
+    }).then(() => {
+        res.json({ msg: "Movie added to watchlist", status: 200 })
+    })
+        .catch((error) => res.json({ msg: error, status: 500 }))
+})
+
+router.delete('/api/user/watchlist:email/:_id', (req, res) => {
+    UserModel.updateOne({ email: req.params.email }, {
+        $pull: {
+            watchlist: { _id: req.params._id }
+        }
+    })
+        .then(() => {
+            res.json({ status: 200 })
+        })
+        .catch(() => {
+            console.log("error")
+            res.json({ msg: "Erreur innatendue côté serveur", status: 500 })
+        })
+})
 
 module.exports = router;
