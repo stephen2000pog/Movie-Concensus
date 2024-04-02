@@ -1,8 +1,9 @@
-import { Button, Container, Form, Navbar } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Dropdown from 'react-bootstrap/Dropdown';
+import SearchBar from '../SearchBar/SearchBar';
 
 function Header() {
 
@@ -16,12 +17,11 @@ function Header() {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="#home">MOVIE-CONCENSUS</Navbar.Brand>
+        <Navbar.Brand href="">MOVIE-CONCENSUS</Navbar.Brand>
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto">
             <Nav.Link href="/">Accueil</Nav.Link>
             <Nav.Link href="/movies">Films</Nav.Link>
-            <Nav.Link href="/error">Exemple Page désuette</Nav.Link>
             {!user && (
               <div>
                 <Nav.Link href="/connexion">Connexion</Nav.Link>
@@ -35,23 +35,15 @@ function Header() {
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item href="/account-info">Configurer Profil</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Liste de visionnement</Dropdown.Item>
+                <Dropdown.Item href="/watchlist">Liste de visionnement</Dropdown.Item>
                 <Dropdown.Item href="#/action-7">Favoris</Dropdown.Item>
                 <Dropdown.Item href="#/action-4">Vos Avis</Dropdown.Item>
-                <Dropdown.Item href="#/action-5" onClick={handleClick}>Déconnexion</Dropdown.Item>
+                <Dropdown.Item href="/" onClick={handleClick}>Déconnexion</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           )}
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Recherche"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Recherche</Button>
-          </Form>
+          <SearchBar></SearchBar>
         </Navbar.Collapse>
       </Container>
     </Navbar>
