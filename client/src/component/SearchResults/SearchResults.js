@@ -6,7 +6,6 @@ import './SearchResults.css'
 const SearchResults = () => {
   const { searchTerm, searchType } = useParams();
   const [searchResults, setSearchResults] = useState([]);
-
   useEffect(() => {
     const fetchSearchResults = async () => {
       try {
@@ -17,8 +16,27 @@ const SearchResults = () => {
       }
     };
 
+    const AjoutCall = async (email) => {
+      try {
+        
+        const nouvelSearch = {email: email,type:searchType, terme: searchTerm}
+        const response = await axios.post(`http://localhost:5000/api/search/add`,nouvelSearch);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error add or update  avis from API:', error);
+      }
+    };
+    const userJSON = localStorage.getItem('user');
+        if (userJSON) {
+          const user = JSON.parse(userJSON);
+          console.log(user.email)
+          if(user.email){
+            AjoutCall(user.email);
+          }
+        } 
+        
     fetchSearchResults();
-  }, [searchTerm]);
+  }, [searchTerm,searchType]);
 
   return (
     <div>
