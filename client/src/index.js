@@ -16,6 +16,7 @@ import ErrorPage from './component/ErrorPage/ErrorPage';
 import Account from './component/Account/Account'
 import SearchResults from './component/SearchResults/SearchResults';
 import Watchlist from './component/Watchlist/Watchlist'
+import ListeAvis from './component/Avis/ListeAvis';
 
 
 const router = createBrowserRouter([
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/watchlist",
         element: <Watchlist />
+      },
+      {
+        path: "/listeAvis",
+        element: <ListeAvis />
       },
       {
         path: "*",
