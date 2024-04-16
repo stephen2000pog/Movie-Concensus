@@ -17,6 +17,7 @@ import Account from './component/Account/Account'
 import SearchResults from './component/SearchResults/SearchResults';
 import Watchlist from './component/Watchlist/Watchlist'
 import ListeAvis from './component/Avis/ListeAvis';
+import SearchList from './component/SearchList/SearchList';
 
 
 const router = createBrowserRouter([
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/listeAvis",
         element: <ListeAvis />
+      },
+      {
+        path: "/searchlist",
+        element: <SearchList />
       },
       {
         path: "*",
