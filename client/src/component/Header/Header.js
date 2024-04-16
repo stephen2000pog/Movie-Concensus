@@ -37,7 +37,7 @@ function Header() {
                 <Dropdown.Item href="/account-info">Configurer Profil</Dropdown.Item>
                 <Dropdown.Item href="/watchlist">Liste de visionnement</Dropdown.Item>
                 <Dropdown.Item href="#/action-7">Favoris</Dropdown.Item>
-                <Dropdown.Item href="#/action-4">Vos Avis</Dropdown.Item>
+                <Dropdown.Item href="/listeAvis">Vos Avis</Dropdown.Item>
                 <Dropdown.Item href="/" onClick={handleClick}>Déconnexion</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

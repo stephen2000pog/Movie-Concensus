@@ -72,4 +72,41 @@ router.delete('/api/user/watchlist:email/:_id', (req, res) => {
         })
 })
 
+router.post('/api/user/updateUser', async (req, res) => {
+    try {
+      const {email, username} = req.body;
+      let errors = {};
+  
+      if ((await UserModel.find({email: email})).length) {
+        const filtre = {email: email};
+        const nouvellesValeurs = {username: username};
+        UserModel.updateOne(filtre, nouvellesValeurs).then(resultat => {
+          console.log('Username mise à jour');
+          res.json('username update');
+        })
+      }
+    } catch (err) {
+      err => res.json(err);
+    }
+  });
+
+  router.post('/api/user/updatePassword', async (req, res) => {
+    try {
+      const {email, password} = req.body;
+      let errors = {};
+  
+      if ((await UserModel.find({email: email})).length) {
+        const filtre = {email: email};
+        const nouvellesValeurs = {password: password};
+        UserModel.updateOne(filtre, nouvellesValeurs).then(resultat => {
+          console.log('Mot de passe mise à jour');
+          res.json('password update');
+        })
+      }
+    } catch (err) {
+      err => res.json(err);
+    }
+  });
+
+
 module.exports = router;
