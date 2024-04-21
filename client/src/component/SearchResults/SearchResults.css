@@ -50,19 +50,23 @@
   border-top: 1px solid black;
 }
 
-a {
+.linkto {
   text-decoration: none;
   color: black;
 }
-a .details h3 {
+
+.linkto:hover {
   color: black;
 }
-a .details h3:hover {
+.linkto .details h3 {
+  color: black;
+}
+.linkto .details h3:hover {
   text-decoration: underline;
 }
-a .details p {
+.linkto .details p {
   color: black;
 }
-a .details p:visited {
+.linkto .details p:visited {
   color: black;
 }

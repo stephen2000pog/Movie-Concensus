@@ -61,7 +61,7 @@ const SearchResults = () => {
         )}
         {searchResults.map(result => (
           <div key={result._id} className="search-item">
-            <Link to={`/movies/${result._id}`}>
+            <Link className="linkto"to={`/movies/${result._id}`}>
               <div className="poster">
                 <img src={result.Poster} alt={result.Title} />
               </div>
