@@ -34,28 +34,25 @@ const Watchlist = () => {
         })
     }
 
-    // const updatePrivate = async (isPrivate) => {
-    //     await axios.post('http://localhost:5000/api/user/private', {
-    //         email: user.email,
-    //         private: isPrivate
-    //     })
-    //         .then((res) => {
-    //             if (res.data.status === 200) {
-    //                 console.log("in here with", isPrivate)
-    //                 setIsPrivate(!isPrivate)
-    //                 console.log(!isPrivate)
-    //             } else {
-    //                 setError("Pas Réussi à changer du côté serveur")
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.log("Some sort of error", err)
-    //         })
-    // }
+    const updatePrivate = async () => {
+        await axios.post('http://localhost:5000/api/user/private', {
+            email: user.email,
+            private: isPrivate
+        })
+            .then((res) => {
+                if (res.data.status !== 200) {
+                    setError("Pas Réussi à changer du côté serveur")
+                }
+            })
+            .catch((err) => {
+                console.log("Some sort of error", err)
+            })
+    }
 
     const changeValue = (e) => {
         e.preventDefault()
         setIsPrivate(!isPrivate)
+        updatePrivate()
     }
 
     useEffect(() => {
