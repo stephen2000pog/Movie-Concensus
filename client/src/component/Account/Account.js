@@ -6,6 +6,7 @@ import { useLogout } from '../../hooks/useLogout';
 import UpdateProfil from './Modal/UpdateProfil';
 import Watchlist from '../Watchlist/Watchlist';
 import './Account.css'
+import { Button } from 'react-bootstrap';
 
 const Profile = () => {
     const { user } = useAuthContext();
@@ -84,9 +85,7 @@ const Profile = () => {
                     <h2>Nom d'utilisateur : {info.username} </h2>
                     <button onClick={openModal} className="btn btn-primary text-center" >Modifier Profil</button>
                     <br />
-                    <span onClick={handleDelete}>
-                        <input className="delete" type='submit' value="Supprimer compte" />
-                    </span>
+                    <Button className='delete' onClick={handleDelete} variant='danger'>Supprimer compte</Button>
                     {error ? (
                         <p className='error'>
                             {error}
