@@ -58,7 +58,7 @@ const Watchlist = () => {
         <div className="App-header">
             <div className='Wrapper'>
             {user && user.id === id && (
-                <><h1>Votre liste de visionnement</h1><span>
+                <><h1 className='titleAuth'>Votre liste de visionnement</h1><span>
                     <br />
                     <FacebookShareButton
                         url={'http://example.com'}
