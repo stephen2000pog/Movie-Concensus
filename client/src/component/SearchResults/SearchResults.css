@@ -35,3 +35,14 @@
 .search-result + .search-result {
   border-top: 1px solid black;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
+a .details h3 {
+  color: black;
+}
+a .details h3:hover {
+  text-decoration: underline;
+}

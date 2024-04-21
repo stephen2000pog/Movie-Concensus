@@ -28,9 +28,9 @@ router.delete('/api/user:email', (req, res) => {
         .catch(() => res.json({ msg: "Erreur innatendue côté serveur", status: 500 }))
 })
 
-router.get('/api/user/watchlist:email', async (req, res) => {
-    const email = req.params.email;
-    UserModel.findOne({ email: email })
+router.get('/api/user/watchlist:id', async (req, res) => {
+    const id = req.params.id;
+    UserModel.findOne({ _id: id })
         .then(async user => {
             const watchlist = user.watchlist
             const movies = []

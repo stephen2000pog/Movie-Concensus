@@ -3,7 +3,6 @@ import axios from 'axios';
 import './Watchlist.css'
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import ErrorPage from '../ErrorPage/ErrorPage';
 import { Button } from 'react-bootstrap';
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share'
 
@@ -11,6 +10,8 @@ const Watchlist = () => {
     const { user } = useAuthContext();
     const [watchlist, setWatchlist] = useState([])
     const [setError] = useState([])
+    const path = window.location.pathname
+    const id = path.substring(path.indexOf(':') + 1)
 
     const removeMovie = async (_id) => {
         console.log(_id)
@@ -37,9 +38,9 @@ const Watchlist = () => {
 
     useEffect(() => {
         const fetchWatchlist = async () => {
-            const response = await axios.get(`http://localhost:5000/api/user/watchlist${user.email}`, {
+            const response = await axios.get(`http://localhost:5000/api/user/watchlist${id}`, {
                 params: {
-                    email: user.email
+                    id: id
                 }
                 // headers: {
                 //     'Auhtorization': `Bearer ${user.token}`
@@ -50,32 +51,36 @@ const Watchlist = () => {
             }
             console.log(response.data)
         }
-        if (user) {
-            fetchWatchlist()
-        }
-    }, [user])
+        fetchWatchlist()
+    }, [id])
 
     return (
         <div className="App-header">
-            <h1>Votre liste de visionnement</h1>
-            {user && (
-                <><ul className='watchlist'>
-                    {watchlist.map(function (movie, i) {
-                        return <li key={movie._id}>
-                            <Link to={`/movies/${movie._id}`} key={movie._id}>
-                                <img
-                                    src={movie.Poster}
-                                    alt={`${movie.Title} Poster`}
-                                    style={{ width: '160px', height: '240px' }} />
-                                <h2>{movie.Title}</h2>
-                            </Link>
-                            <p>{movie.Year} &emsp; {movie.Runtime} &emsp; {movie.Rated} &emsp; {movie.Genre}</p>
-                            <p>Director : {movie.Director} &emsp; Actors : {movie.Actors}</p>
-                            <p>{movie.Plot}</p>
-                            {(<Button variant="outline-danger" size='sm' onClick={() => removeMovie(movie._id)}>Supprimer</Button>)}
-                        </li>;
-                    })}
-                </ul><span>
+            {user && user.id === id && (
+                <h1>Votre liste de visionnement</h1>
+            )}
+            {(!user || (user && user.id !== id)) && (
+                <h1>Liste de visionnement</h1>
+            )}
+            <><ul className='watchlist'>
+                {watchlist.map(function (movie, i) {
+                    return <li key={movie._id}>
+                        <Link to={`/movies/${movie._id}`} key={movie._id}>
+                            <img
+                                src={movie.Poster}
+                                alt={`${movie.Title} Poster`}
+                                style={{ width: '160px', height: '240px' }} />
+                            <h2>{movie.Title}</h2>
+                        </Link>
+                        <p>{movie.Year} &emsp; {movie.Runtime} &emsp; {movie.Rated} &emsp; {movie.Genre}</p>
+                        <p>Director : {movie.Director} &emsp; Actors : {movie.Actors}</p>
+                        <p>{movie.Plot}</p>
+                        {user && user.id === id && (<Button variant="outline-danger" size='sm' onClick={() => removeMovie(movie._id)}>Supprimer</Button>)}
+                    </li>;
+                })}
+            </ul>
+                {user && user.id === id && (
+                    <span>
                         <br />
                         <FacebookShareButton
                             url={'http://example.com'}
@@ -94,11 +99,8 @@ const Watchlist = () => {
                             <TwitterIcon size={32} round />
                             Partager liste
                         </TwitterShareButton>
-                    </span></>
-            )}
-            {!user && (
-                <ErrorPage />
-            )}
+                    </span>
+                )}</>
         </div>
     );
 };
