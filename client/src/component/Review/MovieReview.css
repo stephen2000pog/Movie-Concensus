@@ -1,0 +1,57 @@
+.comment-section {
+    margin-top: 20px;
+  }
+  
+  .comment-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .comment-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .comment-rating {
+    font-weight: bold;
+  }
+  
+  .comment-email {
+    font-style: italic;
+  }
+  
+  .comment-text {
+    margin-top: 5px;
+  }
+  
+  .like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .like-icon {
+    width: 30px;
+    height: auto;
+  }
+
+  .dislike-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dislike-icon {
+    width: 30px;
+    height: auto;
+  }
+  
+  
+  

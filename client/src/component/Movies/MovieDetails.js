@@ -6,6 +6,8 @@ import AvisFilm from '../Avis/AvisFilm';
 
 import AddAvisModal from './Modal/AddAvisModal';
 
+import MovieReview from '../Review/MovieReview'
+
 const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
@@ -156,6 +158,8 @@ const MovieDetails = () => {
           (<button onClick={openModal} className="btn btn-primary text-center" >Ajouter mon avis</button>) :
            (<div><button onClick={openModal} className="btn btn-primary text-center" >Mettre à jour mon avis</button>
             &nbsp;&nbsp;&nbsp;&nbsp;<button onClick={deleteAvis} className="btn btn-danger text-center" >Supprimer mon avis</button></div>)}
+
+    <MovieReview id={id}></MovieReview>
     </div>
   );
 };
