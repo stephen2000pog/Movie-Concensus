@@ -37,10 +37,12 @@ const Watchlist = () => {
     const updatePrivate = async () => {
         await axios.post('http://localhost:5000/api/user/private', {
             email: user.email,
-            private: isPrivate
+            private: !isPrivate
         })
             .then((res) => {
-                if (res.data.status !== 200) {
+                if (res.data.status === 200) {
+                    setIsPrivate(!isPrivate)
+                }else {
                     setError("Pas Réussi à changer du côté serveur")
                 }
             })
@@ -51,7 +53,6 @@ const Watchlist = () => {
 
     const changeValue = (e) => {
         e.preventDefault()
-        setIsPrivate(!isPrivate)
         updatePrivate()
     }
 
