@@ -9,9 +9,9 @@ router.use(express.json())
 // requireAuth for all user data
 // router.use(requireAuth)
 
-router.get('/api/user:email', (req, res) => {
-    const email = req.params.email;
-    UserModel.findOne({ email: email })
+router.get('/api/user:id', (req, res) => {
+    const id = req.params.id;
+    UserModel.findOne({ _id: id })
         .then(user => {
             res.json({ user, status: 200 })
         })
