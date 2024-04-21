@@ -47,7 +47,7 @@ const SearchResults = () => {
       <div>
         {searchType === 'user' && (
           searchResults.map(result => (
-            <div key={result._id} className="search-result">
+            <div key={result._id} className="search-item">
               <Link to={`/account-info/:${result._id}`}>
                 <div className="poster">
                   <img src={userIcon} alt="" />
@@ -60,19 +60,21 @@ const SearchResults = () => {
           ))
         )}
         {searchResults.map(result => (
-          <div key={result._id} className="search-result">
-            <div className="poster">
-              <img src={result.Poster} alt={result.Title} />
-            </div>
-            <div className="details">
-              <h3>{result.Title}</h3>
-              <p>{result.Year}</p>
-              <p>{result.Actors}</p>
-            </div>
+          <div key={result._id} className="search-item">
+            <Link to={`/movies/${result._id}`}>
+              <div className="poster">
+                <img src={result.Poster} alt={result.Title} />
+              </div>
+              <div className="details">
+                <h3>{result.Title}</h3>
+                <p>{result.Year}</p>
+                <p>{result.Actors}</p>
+              </div>
+            </Link>
           </div>
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 
