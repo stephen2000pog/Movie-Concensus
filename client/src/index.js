@@ -18,6 +18,7 @@ import SearchResults from './component/SearchResults/SearchResults';
 import Watchlist from './component/Watchlist/Watchlist'
 import ListeAvis from './component/Avis/ListeAvis';
 import SearchList from './component/SearchList/SearchList';
+import Profil from './component/Profil/Profil'
 
 
 const router = createBrowserRouter([
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "/searchlist",
         element: <SearchList />
+      },
+      {
+        path: "/profil/:email",
+        element: <Profil />
       },
       {
         path: "*",

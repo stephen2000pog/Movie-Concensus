@@ -52,6 +52,12 @@
     width: 30px;
     height: auto;
   }
+
+  .comment-email {
+    background-color:aquamarine ;
+    color: #000 !important;
+  }
+  
   
   
   

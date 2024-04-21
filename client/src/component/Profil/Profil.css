@@ -1,0 +1,59 @@
+.profil-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .profil-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .profil-info {
+    margin-bottom: 30px;
+  }
+  
+  .profil-info p {
+    margin-bottom: 10px;
+  }
+  
+  .avis-section {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .avis-heading {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .avis-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .avis-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+  }
+  
+  .avis-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .avis-comment,
+  .avis-rating {
+    margin-left: 15px;
+  }
+  
+  .no-avis {
+    font-style: italic;
+    color: #888;
+  }
+  
