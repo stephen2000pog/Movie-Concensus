@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
 import UpdateProfil from './Modal/UpdateProfil';
 import Watchlist from '../Watchlist/Watchlist';
+import './Account.css'
 
 const Profile = () => {
     const { user } = useAuthContext();
@@ -78,7 +79,7 @@ const Profile = () => {
         <div className="App-header" >
             {user && user.id === id && (
                 <div className='text-center '>
-                    <h1>Informations du compte</h1>
+                    <h1 className='infocompte'>Informations du compte</h1>
                     <h2>Adresse courriel : {info.email}</h2>
                     <h2>Nom d'utilisateur : {info.username} </h2>
                     <button onClick={openModal} className="btn btn-primary text-center" >Modifier Profil</button>

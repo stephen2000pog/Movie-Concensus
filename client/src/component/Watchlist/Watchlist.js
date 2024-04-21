@@ -56,13 +56,33 @@ const Watchlist = () => {
 
     return (
         <div className="App-header">
+            <div className='Wrapper'>
             {user && user.id === id && (
-                <h1>Votre liste de visionnement</h1>
+                <><h1>Votre liste de visionnement</h1><span>
+                    <br />
+                    <FacebookShareButton
+                        url={'http://example.com'}
+                        quote={'Regarder ma liste de visionnement et conseiller moi!'}
+                        hashtag="#movieconsensus"
+                    >
+                        <FacebookIcon size={32} round />
+                        <span className='partage'>Partager liste</span>
+                    </FacebookShareButton>
+                    <span>&emsp;</span>
+                    <TwitterShareButton
+                        url={'http://example.com'}
+                        quote={'Regarder ma liste de visionnement et conseiller moi!'}
+                        hashtag="#movieconsensus"
+                    >
+                        <TwitterIcon size={32} round />
+                        <span className='partage'>Partager liste</span>
+                    </TwitterShareButton>
+                </span></>
             )}
             {(!user || (user && user.id !== id)) && (
                 <h1>Liste de visionnement</h1>
             )}
-            <><ul className='watchlist'>
+            <ul className='watchlist'>
                 {watchlist.map(function (movie, i) {
                     return <li key={movie._id}>
                         <Link to={`/movies/${movie._id}`} key={movie._id}>
@@ -70,7 +90,7 @@ const Watchlist = () => {
                                 src={movie.Poster}
                                 alt={`${movie.Title} Poster`}
                                 style={{ width: '160px', height: '240px' }} />
-                            <h2>{movie.Title}</h2>
+                            <h2 className='movietitle'>{movie.Title}</h2>
                         </Link>
                         <p>{movie.Year} &emsp; {movie.Runtime} &emsp; {movie.Rated} &emsp; {movie.Genre}</p>
                         <p>Director : {movie.Director} &emsp; Actors : {movie.Actors}</p>
@@ -79,28 +99,7 @@ const Watchlist = () => {
                     </li>;
                 })}
             </ul>
-                {user && user.id === id && (
-                    <span>
-                        <br />
-                        <FacebookShareButton
-                            url={'http://example.com'}
-                            quote={'Regarder ma liste de visionnement et conseiller moi!'}
-                            hashtag="#movieconsensus"
-                        >
-                            <FacebookIcon size={32} round />
-                            Partager liste
-                        </FacebookShareButton>
-                        <br />
-                        <TwitterShareButton
-                            url={'http://example.com'}
-                            quote={'Regarder ma liste de visionnement et conseiller moi!'}
-                            hashtag="#movieconsensus"
-                        >
-                            <TwitterIcon size={32} round />
-                            Partager liste
-                        </TwitterShareButton>
-                    </span>
-                )}</>
+            </div>
         </div>
     );
 };
