@@ -16,8 +16,9 @@ router.post("/login", (req, res) => {
       if (user) {
         if (user.password === password) {
           const id =  user._id 
+          const private = user.private
           // const token = createToken(_id)
-          res.json({ email, id, status: 200 })
+          res.json({ email, id, private, status: 200 })
         } else {
           res.json({ msg: "Mot de passe invalide", status: 400 })
         }

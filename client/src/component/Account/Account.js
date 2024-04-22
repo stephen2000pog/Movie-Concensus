@@ -104,7 +104,9 @@ const Profile = () => {
                 <div>
                     <h1>Informations du compte</h1>
                     <h2>Nom d'utilisateur : {info.username} </h2>
-                    <Watchlist />
+                    {!info.private && (
+                        <Watchlist />
+                    )}
                 </div>
 
             )}

@@ -7,12 +7,12 @@ import { Button } from 'react-bootstrap';
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share'
 
 const Watchlist = () => {
-    const { user } = useAuthContext();
+    const { user } = useAuthContext()
+    const {dispatch } = useAuthContext()
     const [watchlist, setWatchlist] = useState([])
     const [error, setError] = useState([])
     const path = window.location.pathname
     const id = path.substring(path.indexOf(':') + 1)
-    const [isPrivate, setIsPrivate] = useState(false);
 
     const removeMovie = async (_id) => {
         console.log(_id)
@@ -37,11 +37,14 @@ const Watchlist = () => {
     const updatePrivate = async () => {
         await axios.post('http://localhost:5000/api/user/private', {
             email: user.email,
-            private: !isPrivate
+            private: !user.private
         })
             .then((res) => {
                 if (res.data.status === 200) {
-                    setIsPrivate(!isPrivate)
+                    user.private = !user.private
+                    localStorage.setItem('user', JSON.stringify(user))
+                    dispatch({type: 'LOGIN', payload: user})
+                    console.log(JSON.stringify(user))
                 }else {
                     setError("Pas Réussi à changer du côté serveur")
                 }
@@ -67,7 +70,6 @@ const Watchlist = () => {
                     if (watchlist.data.status === 200) {
                         setWatchlist(watchlist.data.movies)
                     }
-                    console.log(watchlist.data)
                 })
                 .catch(err => {
                     console.log(err)
@@ -101,10 +103,10 @@ const Watchlist = () => {
                         </TwitterShareButton>
                     </span>
                         <span>&emsp;</span>
-                        {isPrivate === false && (
+                        {user.private === false && (
                             <Button variant="outline-success" onClick={changeValue}>Mettre watchlist privée</Button>
                         )}
-                        {isPrivate === true && (
+                        {user.private === true && (
                             <Button variant='success' onClick={changeValue}>Mettre watchlist publique</Button>
                         )}
                         {error && (

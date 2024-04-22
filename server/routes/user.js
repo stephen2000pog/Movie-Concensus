@@ -30,10 +30,9 @@ router.delete('/api/user:email', (req, res) => {
 
 router.post('/api/user/private', (req, res) => {
   const { private, email } = req.body;
-  UserModel.updateOne({ email: email }, {
-    private: private
-  }).then(() => {
-    res.json({ msg: "Changed state private", status: 200 })
+  UserModel.findOneAndUpdate({ email: email }, 
+    {private: private}, { new: true }).then(user => {
+    res.json({ user, status: 200 })
   })
     .catch((error) => res.json({ msg: error, status: 500 }))
 })
