@@ -22,4 +22,17 @@ router.get('/api/movie/:id', async (req, res) => {
   }
 });
 
+const AvisTable = require('../models/avisTable');
+
+router.get('/api/movie/:id/comments', async (req, res) => {
+  try {
+    const movieId = req.params.id;
+    const avis = await AvisTable.find({ idMovie: movieId });
+    res.json(avis);
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;

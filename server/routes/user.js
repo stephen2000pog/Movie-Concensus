@@ -108,5 +108,21 @@ router.post('/api/user/updateUser', async (req, res) => {
     }
   });
 
+  router.get('/api/user/:email', async (req, res) => {
+    try {
+      const email = req.params.email;
+      // Retrieve user profile information from the database based on the email
+      const userProfil = await UserModel.findOne({ email });
+      if (!userProfil) {
+        return res.status(404).json({ message: "User profile not found" });
+      }
+      // Return user profile information
+      res.status(200).json(userProfil);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
 
 module.exports = router;
