@@ -1,14 +1,14 @@
-form {
+#form {
   text-align: center;
-  /* font-size: 70%; */
   min-width: 400px;
   max-width: 400px;
-} 
+}
 
-h1 {
-  font-size: 25px;
+.titleauth {
+  padding-top: 150px;
+  font-size: 28px;
   font-weight: normal;
-  margin-bottom: 8%;
+  padding-bottom: 30px;
 }
 
 h2 {
@@ -21,52 +21,30 @@ input {
   border-radius: 9px;
   padding: 2%;
   border-style: solid;
-  border-color: #D3D3D3;;
+  border-color: #D3D3D3;
+  ;
   margin-bottom: 2%;
   padding: 2%;
   min-width: 400px;
   max-width: 400px;
-  /* width: 50%; */
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
 
-.delete {
-  margin-top: 50px;
-  min-width: 200px;
-  max-width: 200px;
-  background-color: crimson;
-  color: white;
-  border-color: crimson;
-}
-.delete:hover {
-  border-color: white;
-}
-
-li {
-  list-style: none;
-  font-size: 20px;
+a:visited {
   text-decoration: none;
+  color: #097CE0;
 }
 
-li a {
+a:hover,
+a:active {
   text-decoration: none;
-  color:#097CE0;
-}
-
-a:visited { 
-  text-decoration: none; 
-  color:#097CE0; 
-}
-
-a:hover, a:active { 
-  text-decoration: none; 
-  color:gray 
+  color: gray
 }
 
 .error {
   color: red;
-  font-size: small; 
+  font-size: small;
 }
 
 .p-viewer {
@@ -76,4 +54,10 @@ a:hover, a:active {
   float: right;
 }
 
+.prompt a {
+  font-size: smaller;
+}
 
+.prompt {
+  font-size: 20px;
+}

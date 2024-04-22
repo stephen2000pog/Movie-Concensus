@@ -12,9 +12,6 @@ const MovieList = () => {
     await axios.post('http://localhost:5000/api/user/watchlist', {
       _id: _id,
       email: user.email
-      // headers: {
-      //     'Auhtorization': `Bearer ${user.token}`
-      // }
     })
       .then((response) => {
         console.log(_id)
@@ -45,7 +42,7 @@ const MovieList = () => {
 
   return (
     <div className="App-header container-fluid movie-app">
-      <h2>Liste des Films</h2>
+      <h2 className='listefilms'>Liste des Films</h2>
       <div className="movies-container">
         {movies.slice(0, 100).map((movie) => (
           <div className="movie-link">

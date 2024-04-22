@@ -7,6 +7,20 @@
   padding: 10px;
 }
 
+.search-item a{
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding: 10px;
+  text-align: justify;
+}
+
+.search-item + .search-item {
+  border-top: 1px solid black;
+}
+
 .poster {
   margin-right: 20px;
   flex: none;
@@ -34,4 +48,33 @@
 
 .search-result + .search-result {
   border-top: 1px solid black;
+}
+
+.linkto {
+  text-decoration: none;
+  color: black;
+}
+.linkto:hover {
+  color: black;
+}
+.linkto .details h3 {
+  color: black;
+}
+.linkto .details h3:hover {
+  text-decoration: underline;
+}
+.linkto .details p {
+  color: black;
+}
+.linkto .details p:visited {
+  color: black;
+}
+
+.search-item a {
+  text-decoration: none;
+  color: black;
+}
+.search-item a:hover {
+  text-decoration: underline;
+  color: black;
 }
