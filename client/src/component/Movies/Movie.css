@@ -33,3 +33,8 @@
 .text-left {
   text-align: left;
 }
+
+.listefilms {
+  padding-top: 200px;
+  padding-bottom: 30px;
+}
