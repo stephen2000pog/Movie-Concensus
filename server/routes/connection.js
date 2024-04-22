@@ -45,7 +45,7 @@ router.post('/signup', async (req, res) => {
     if (Object.keys(errors).length > 0) {
       res.json(errors);
     } else {
-      const user = new UserModel({ username, email, password });
+      const user = new UserModel({ username, email, password, private: false });
       user.save();
       res.json("User added!");
     }

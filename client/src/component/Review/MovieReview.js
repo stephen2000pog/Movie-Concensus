@@ -9,8 +9,6 @@ import { Link } from 'react-router-dom';
 
 function CommentSection({ id }) {
     const [comments, setComments] = useState([]);
-    const [likedComments, setLikedComments] = useState([]);
-    const [dislikedComments, setDislikedComments] = useState([]);
 
   useEffect(() => {
     const fetchComments = async () => {
