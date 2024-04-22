@@ -54,7 +54,6 @@
   text-decoration: none;
   color: black;
 }
-
 .linkto:hover {
   color: black;
 }
@@ -68,5 +67,14 @@
   color: black;
 }
 .linkto .details p:visited {
+  color: black;
+}
+
+.search-item a {
+  text-decoration: none;
+  color: black;
+}
+.search-item a:hover {
+  text-decoration: underline;
   color: black;
 }

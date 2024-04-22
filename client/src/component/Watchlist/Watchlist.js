@@ -94,7 +94,7 @@ const Watchlist = () => {
                         </FacebookShareButton>
                         <span>&emsp;</span>
                         <TwitterShareButton
-                            url={'http://example.com'}
+                            url={`http://localhost:3000/watchlist/:${id}`}
                             quote={'Regarder ma liste de visionnement et conseiller moi!'}
                             hashtag="#movieconsensus"
                         >
