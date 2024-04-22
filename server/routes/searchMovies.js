@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Movie = require('../models/movie');
+const User = require('../models/user');
 const Search = require('../models/search');
 
 router.get('/api/search', async (req, res) => {
@@ -20,6 +21,8 @@ router.get('/api/search', async (req, res) => {
       searchResults = await Movie.find({ Genre: { $regex: searchTerm, $options: 'i' } });
     } else if (searchType === 'language') {
       searchResults = await Movie.find({ Language: { $regex: searchTerm, $options: 'i' } });
+    } else if (searchType === 'user') {
+      searchResults = await User.find({ username: {$regex: searchTerm, $options: 'i' } });
     } else {
       searchResults = await Movie.find({
         $or: [
@@ -31,7 +34,7 @@ router.get('/api/search', async (req, res) => {
         ]
       });
     }
-
+    console.log()
     res.json(searchResults);
   } catch (error) {
     console.error('Error searching movies:', error);

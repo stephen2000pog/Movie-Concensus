@@ -20,7 +20,7 @@ const SearchBar = ({ onSearch }) => {
     event.preventDefault();
     onSearch(searchTerm, searchType);
   };
-  
+
 
   return (
     <Form className="d-flex" onSubmit={handleSubmit}>
@@ -31,6 +31,7 @@ const SearchBar = ({ onSearch }) => {
         <Dropdown.Item onClick={() => handleSearchTypeChange('actor', 'Acteur')}>Acteur</Dropdown.Item>
         <Dropdown.Item onClick={() => handleSearchTypeChange('genre', 'Genre')}>Genre</Dropdown.Item>
         <Dropdown.Item onClick={() => handleSearchTypeChange('language', 'Langue')}>Langue</Dropdown.Item>
+        <Dropdown.Item onClick={() => handleSearchTypeChange('user', 'Utilisateur')}>Utilisateur</Dropdown.Item>
       </DropdownButton>
       <Form.Control
         type="search"

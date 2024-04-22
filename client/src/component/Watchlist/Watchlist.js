@@ -3,13 +3,16 @@ import axios from 'axios';
 import './Watchlist.css'
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import ErrorPage from '../ErrorPage/ErrorPage';
 import { Button } from 'react-bootstrap';
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share'
 
 const Watchlist = () => {
-    const { user } = useAuthContext();
+    const { user } = useAuthContext()
+    const {dispatch } = useAuthContext()
     const [watchlist, setWatchlist] = useState([])
     const [error, setError] = useState([])
+    const path = window.location.pathname
+    const id = path.substring(path.indexOf(':') + 1)
 
     const removeMovie = async (_id) => {
         console.log(_id)
@@ -19,9 +22,6 @@ const Watchlist = () => {
                 email: user.email,
                 _id: _id
             }
-            // headers: {
-            //     'Auhtorization': `Bearer ${user.token}`
-            // }
         }).then((response) => {
             if (response.data.status === 200) {
                 console.log("Movie removed from wathclist")
@@ -34,30 +34,90 @@ const Watchlist = () => {
         })
     }
 
+    const updatePrivate = async () => {
+        await axios.post('http://localhost:5000/api/user/private', {
+            email: user.email,
+            private: !user.private
+        })
+            .then((res) => {
+                if (res.data.status === 200) {
+                    user.private = !user.private
+                    localStorage.setItem('user', JSON.stringify(user))
+                    dispatch({type: 'LOGIN', payload: user})
+                    console.log(JSON.stringify(user))
+                }else {
+                    setError("Pas Réussi à changer du côté serveur")
+                }
+            })
+            .catch((err) => {
+                console.log("Some sort of error", err)
+            })
+    }
+
+    const changeValue = (e) => {
+        e.preventDefault()
+        updatePrivate()
+    }
+
     useEffect(() => {
         const fetchWatchlist = async () => {
-            const response = await axios.get(`http://localhost:5000/api/user/watchlist${user.email}`, {
+            await axios.get(`http://localhost:5000/api/user/watchlist${id}`, {
                 params: {
-                    email: user.email
+                    id: id
                 }
-                // headers: {
-                //     'Auhtorization': `Bearer ${user.token}`
-                // }
             })
-            if (response.data.status === 200) {
-                setWatchlist(response.data.movies)
-            }
-            console.log(response.data)
+                .then(watchlist => {
+                    if (watchlist.data.status === 200) {
+                        setWatchlist(watchlist.data.movies)
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
-        if (user) {
-            fetchWatchlist()
-        }
-    }, [user])
+        fetchWatchlist()
+    }, [id])
 
     return (
         <div className="App-header">
-            <h1>Votre liste de visionnement</h1>
-            {user && (
+            <div className='Wrapper'>
+                {user && user.id === id && (
+                    <><h1 className='titleAuth'>Votre liste de visionnement</h1><span>
+                        <br />
+                        <FacebookShareButton
+                            url={'http://example.com'}
+                            quote={'Regarder ma liste de visionnement et conseiller moi!'}
+                            hashtag="#movieconsensus"
+                        >
+                            <FacebookIcon size={32} round />
+                            <span className='partage'>Partager liste</span>
+                        </FacebookShareButton>
+                        <span>&emsp;</span>
+                        <TwitterShareButton
+                            url={`http://localhost:3000/watchlist/:${id}`}
+                            quote={'Regarder ma liste de visionnement et conseiller moi!'}
+                            hashtag="#movieconsensus"
+                        >
+                            <TwitterIcon size={32} round />
+                            <span className='partage'>Partager liste</span>
+                        </TwitterShareButton>
+                    </span>
+                        <span>&emsp;</span>
+                        {user.private === false && (
+                            <Button variant="outline-success" onClick={changeValue}>Mettre watchlist privée</Button>
+                        )}
+                        {user.private === true && (
+                            <Button variant='success' onClick={changeValue}>Mettre watchlist publique</Button>
+                        )}
+                        {error && (
+                            <p>{error}</p>
+                        )}
+                    </>
+
+                )}
+                {(!user || (user && user.id !== id)) && (
+                    <h1>Liste de visionnement</h1>
+                )}
                 <ul className='watchlist'>
                     {watchlist.map(function (movie, i) {
                         return <li key={movie._id}>
@@ -65,21 +125,17 @@ const Watchlist = () => {
                                 <img
                                     src={movie.Poster}
                                     alt={`${movie.Title} Poster`}
-                                    style={{ width: '160px', height: '240px' }}
-                                />
-                                <h2>{movie.Title}</h2>
+                                    style={{ width: '160px', height: '240px' }} />
+                                <h2 className='movietitle'>{movie.Title}</h2>
                             </Link>
                             <p>{movie.Year} &emsp; {movie.Runtime} &emsp; {movie.Rated} &emsp; {movie.Genre}</p>
                             <p>Director : {movie.Director} &emsp; Actors : {movie.Actors}</p>
                             <p>{movie.Plot}</p>
-                            <Button variant="outline-danger" size='sm' onClick={() => removeMovie(movie._id)}>Supprimer</Button>
-                        </li>
+                            {user && user.id === id && (<Button variant="outline-danger" size='sm' onClick={() => removeMovie(movie._id)}>Supprimer</Button>)}
+                        </li>;
                     })}
                 </ul>
-            )}
-            {!user && (
-                <ErrorPage />
-            )}
+            </div>
         </div>
     );
 };

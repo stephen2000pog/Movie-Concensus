@@ -51,9 +51,9 @@ export default function Authentication() {
     if (!validateEmailFormat(inputValues.email))
       errors.email = "Format courriel : example@example.example";
     if (!validatePSWFormat(inputValues.password))
-      errors.password = "De 6 à 15 caractères. Acceptés : Aa-Zz, 0-9 et !@#$%?&*";
+      errors.password = "Mot de passe : de 6 à 15 caractères. Acceptés : Aa-Zz, 0-9 et !@#$%?&*";
     if (!validateUsername(inputValues.username))
-      errors.username = "De 4 à 25 caractères. Acceptés : Aa-Zz, 0-9, . et _";
+      errors.username = "Nom d'utilisateur : de 4 à 25 caractères. Acceptés : Aa-Zz, 0-9, . et _";
     return errors;
   }
 
@@ -93,8 +93,8 @@ export default function Authentication() {
 
   return (
     <div className="App-header">
+      <h1 className='titleauth'>Créer un compte</h1>
       <form id='form' onSubmit={handleSubmit} className='create-account'>
-        <h1>Créer un compte</h1>
         <input
           className='identification'
           type='text'
@@ -126,37 +126,37 @@ export default function Authentication() {
         </span>
         <br />
         <input type='submit' value="Créer votre compte" />
-        {errors.username ? (
-          <p className='error'>
-            {errors.username}
-          </p>
-        ) : null}
-        {errors.email ? (
-          <p className='error'>
-            {errors.email}
-          </p>
-        ) : null}
-        {errors.password ? (
-          <p className='error'>
-            {errors.password}
-          </p>
-        ) : null}
-        {response.username ? (
-          <p className='error'>
-            {response.username}
-          </p>
-        ) : null}
-        {response.email ? (
-          <p className='error'>
-            {response.email}
-          </p>
-        ) : null}
-        {response.password ? (
-          <p className='error'>
-            {response.password}
-          </p>
-        ) : null}
       </form>
+      {errors.username ? (
+        <p className='error'>
+          {errors.username}
+        </p>
+      ) : null}
+      {errors.email ? (
+        <p className='error'>
+          {errors.email}
+        </p>
+      ) : null}
+      {errors.password ? (
+        <p className='error'>
+          {errors.password}
+        </p>
+      ) : null}
+      {response.username ? (
+        <p className='error'>
+          {response.username}
+        </p>
+      ) : null}
+      {response.email ? (
+        <p className='error'>
+          {response.email}
+        </p>
+      ) : null}
+      {response.password ? (
+        <p className='error'>
+          {response.password}
+        </p>
+      ) : null}
     </div>
   )
 }

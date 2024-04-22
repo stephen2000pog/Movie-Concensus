@@ -51,11 +51,11 @@ const router = createBrowserRouter([
         element: <CreateAccount />,
       },
       {
-        path: "/account-info",
+        path: "/account-info/:id",
         element: <Account />
       },
       {
-        path: "/watchlist",
+        path: "/watchlist/:id",
         element: <Watchlist />
       },
       {
