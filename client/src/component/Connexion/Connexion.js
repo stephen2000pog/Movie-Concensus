@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../../css/Authentication.css'
+// import '../../css/Authentication.css'
 import { useNavigate } from 'react-router-dom';
 import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
@@ -95,8 +95,8 @@ function Connexion() {
   }, [inputFields, errors, submitting, navigate, response, dispatch]);
   return (
     <div className="App-header">
+      <h1 className='titleauth'>Connectez-vous avec votre compte Movies Consensus</h1>
       <form id='form' onSubmit={handleSubmit} className='connection'>
-        <h1>Connectez-vous avec votre compte Movies Consensus</h1>
         <input
           className='identification'
           type='text'
@@ -115,12 +115,10 @@ function Connexion() {
           placeholder='Mot de passe'
         />
         <span onClick={handleToggle}>
-          <Icon className="p-viewer" icon={icon} size={30} />
+          <Icon className="p-viewer" icon={icon} size={27} />
         </span>
         <br />
         <input type='submit' value="Connexion" />
-        <li>Pas de compte? <Link to="/create-account">Créez-en un</Link></li>
-        <li><Link to="/connexion">Mot de passe oublié?</Link></li>
         {errors.email ? (
           <p className='error'>
             {errors.email}
@@ -137,7 +135,9 @@ function Connexion() {
           </p>
         ) : null}
       </form>
-    </div>
+      <p className='prompt'>Pas de compte? <Link to="/create-account">Créez-en un</Link></p>
+      <p className='prompt'><Link to="/connexion">Mot de passe oublié?</Link></p>
+    </div >
   );
 }
 

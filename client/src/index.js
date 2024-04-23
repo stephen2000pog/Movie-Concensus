@@ -16,6 +16,9 @@ import ErrorPage from './component/ErrorPage/ErrorPage';
 import Account from './component/Account/Account'
 import SearchResults from './component/SearchResults/SearchResults';
 import Watchlist from './component/Watchlist/Watchlist'
+import ListeAvis from './component/Avis/ListeAvis';
+import SearchList from './component/SearchList/SearchList';
+import Profil from './component/Profil/Profil'
 
 
 const router = createBrowserRouter([
@@ -48,12 +51,24 @@ const router = createBrowserRouter([
         element: <CreateAccount />,
       },
       {
-        path: "/account-info",
+        path: "/account-info/:id",
         element: <Account />
       },
       {
-        path: "/watchlist",
+        path: "/watchlist/:id",
         element: <Watchlist />
+      },
+      {
+        path: "/listeAvis",
+        element: <ListeAvis />
+      },
+      {
+        path: "/searchlist",
+        element: <SearchList />
+      },
+      {
+        path: "/profil/:email",
+        element: <Profil />
       },
       {
         path: "*",

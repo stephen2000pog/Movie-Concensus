@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 
 router.use(express.json())
 
-const createToken = (_id) => {
-  return jwt.sign(_id, "secretwordfortestingpuposesforthetokeninm5151")
-}
+// const createToken = (_id) => {
+//   return jwt.sign(_id, "secretwordfortestingpuposesforthetokeninm5151")
+// }
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
@@ -15,9 +15,10 @@ router.post("/login", (req, res) => {
     .then(user => {
       if (user) {
         if (user.password === password) {
-          const _id = { _id: user._id }
-          const token = createToken(_id)
-          res.json({ email, token, status: 200 })
+          const id =  user._id 
+          const private = user.private
+          // const token = createToken(_id)
+          res.json({ email, id, private, status: 200 })
         } else {
           res.json({ msg: "Mot de passe invalide", status: 400 })
         }
@@ -44,7 +45,7 @@ router.post('/signup', async (req, res) => {
     if (Object.keys(errors).length > 0) {
       res.json(errors);
     } else {
-      const user = new UserModel({ username, email, password });
+      const user = new UserModel({ username, email, password, private: false });
       user.save();
       res.json("User added!");
     }
