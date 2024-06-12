@@ -1,17 +1,37 @@
 # Movie-Concensus
-online database of information related to films
 
+## Description
+
+**Movie-Concensus** is an online database designed to provide comprehensive information related to films. Inspired by IMDb, our platform offers detailed movie data, including plot summaries, cast and crew details, ratings, and reviews. By leveraging the OMDB API, we ensure our data is accurate, providing users with a reliable resource for all their movie information needs.
+
+### Key Features
+
+- **Comprehensive Movie Database:**
+  - **Detailed Information:** Access extensive details about movies, including plot summaries, release dates, genres, cast, and crew.
+  - **User Ratings and Reviews:** Read and contribute reviews and ratings for movies.
+  - **Search and Filter:** Search for movies and filter results based on various criteria such as genre, release year, and ratings.
+
+### Technologies Used
+
+- **Frontend:**
+  - React.js for building the user interface.
+
+- **Backend:**
+  - Node.js with Express for creating the backend server.
+  - MongoDB for storing movie data.
+  - OMDB API for fetching movie information.
+    
 ## Install dependacy
-Les dependances de chaque environnment se retrouve dans le fichier package.json.
+The dependencies for each environment are listed in the `package.json` file.
 
- Pour installer les dependances du serveur:Dans le terminal, faites la commande 
+To install the server dependencies, run the following command in the terminal:
 
 ```
 cd server
 npm install
 ```
 
-Pour installer les dependances du client react:Dans le terminal, faites la commande 
+To install the React client dependencies, run the following command in the terminal:
 
 ```
 cd client
@@ -19,14 +39,14 @@ npm install
 ```
 
 ## Run the project
-Pour run le serveur client
+To run the React client server, use the following command in the terminal:
 
  ```
 cd client
 npm start
 ```
 
-Pour run le serveur
+To run the backend server, use the following command in the terminal:
 
  ```
 cd server
