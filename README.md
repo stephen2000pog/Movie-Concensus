@@ -10,6 +10,7 @@
   - **Detailed Information:** Access extensive details about movies, including plot summaries, release dates, genres, cast, and crew.
   - **User Ratings and Reviews:** Read and contribute reviews and ratings for movies.
   - **Search and Filter:** Search for movies and filter results based on various criteria such as genre, release year, and ratings.
+  - **Watchlist Management:** Users can add movies to their watchlist, view the list, and share it on social media.
 
 ### Technologies Used
 
